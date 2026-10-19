@@ -1,0 +1,13 @@
+{
+  "domain": "newsfeed",
+  "name": "Newsfeed",
+  "codeowners": ["@pazifi5t"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/pazifi5t/ha-newsfeed",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/pazifi5t/ha-newsfeed/issues",
+  "requirements": [],
+  "version": "1.0.0"
+}

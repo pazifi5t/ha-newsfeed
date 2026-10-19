@@ -1,0 +1,79 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Newsfeed is already set up. Change topics and sources via “Configure”."
+    },
+    "error": {
+      "no_topics": "Please select at least one topic.",
+      "no_sources": "Please select at least one source or add a custom feed.",
+      "invalid_url": "Each line must be a URL starting with http:// or https://.",
+      "invalid_feed": "No readable RSS/Atom feed was found at this address."
+    },
+    "step": {
+      "user": {
+        "title": "Set up Newsfeed",
+        "description": "Choose your topics. In the next step you pick the sources for each topic.",
+        "data": {
+          "topics": "Topics",
+          "period": "Default period",
+          "max_items": "Articles per topic",
+          "scan_interval": "Update interval"
+        }
+      },
+      "sources": {
+        "title": "Sources for {topic}",
+        "description": "Choose the sources for **{topic}**. Optionally add your own RSS/Atom feeds (one URL per line).",
+        "data": {
+          "sources": "Sources",
+          "custom_feeds": "Custom feeds"
+        }
+      }
+    }
+  },
+  "entity": {
+    "select": {
+      "period": {
+        "name": "Period",
+        "state": {
+          "day": "Today (24 h)",
+          "week": "This week (7 days)"
+        }
+      },
+      "topic": {
+        "name": "Topic"
+      }
+    },
+    "sensor": {
+      "selected": {
+        "name": "Selected news"
+      }
+    }
+  },
+  "options": {
+    "error": {
+      "no_topics": "Please select at least one topic.",
+      "no_sources": "Please select at least one source or add a custom feed.",
+      "invalid_url": "Each line must be a URL starting with http:// or https://.",
+      "invalid_feed": "No readable RSS/Atom feed was found at this address."
+    },
+    "step": {
+      "init": {
+        "title": "Adjust Newsfeed",
+        "data": {
+          "topics": "Topics",
+          "period": "Default period",
+          "max_items": "Articles per topic",
+          "scan_interval": "Update interval"
+        }
+      },
+      "sources": {
+        "title": "Sources for {topic}",
+        "description": "Choose the sources for **{topic}**. Optionally add your own RSS/Atom feeds (one URL per line).",
+        "data": {
+          "sources": "Sources",
+          "custom_feeds": "Custom feeds"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+# Newsfeed – Beispiel-Dashboard (Ansicht bearbeiten → Raw-Konfigurationseditor)
+# Entity-IDs gelten für eine deutschsprachige HA-Installation; bei Englisch heißen
+# die Auswahlen select.newsfeed_period / select.newsfeed_topic und der Sensor
+# sensor.newsfeed_selected_news.
+
+title: News
+views:
+  - title: News
+    path: news
+    icon: mdi:newspaper-variant-outline
+    cards:
+      # Umschalten: Thema und Zeitraum
+      - type: entities
+        entities:
+          - entity: select.newsfeed_thema
+          - entity: select.newsfeed_zeitraum
+
+      # Liste des gewählten Themas (ideal fürs Wandpanel)
+      - type: markdown
+        title: Schlagzeilen
+        content: |
+          {% set s = 'sensor.newsfeed_ausgewahlte_news' %}
+          {% set arts = state_attr(s, 'articles') or [] %}
+          ### {{ state_attr(s, 'topic') }} · {{ state_attr(s, 'period_label') }}
+          {% for a in arts %}
+          {{ '⭐ ' if a.top else '' }}**[{{ a.title }}]({{ a.link }})**<br>
+          <small>{{ a.source }}{% if a.published %} · {{ as_timestamp(a.published) | timestamp_custom('%a %d.%m. %H:%M') }}{% endif %}</small>
+          {% if a.summary %}<br><small>{{ a.summary }}</small>{% endif %}
+
+          {% else %}
+          _Keine Artikel im gewählten Zeitraum._
+          {% endfor %}
+          {% if state_attr(s, 'unavailable_sources') %}
+          <small>⚠️ Nicht erreichbar: {{ state_attr(s, 'unavailable_sources') | join(', ') }}</small>
+          {% endif %}
+
+  # Alternative: alle Themen nebeneinander
+  - title: Alle Themen
+    path: news-alle
+    type: sections
+    sections:
+      - type: grid
+        cards:
+          - type: markdown
+            title: IT
+            content: |
+              {% for a in state_attr('sensor.newsfeed_it', 'articles') or [] %}
+              {{ '⭐ ' if a.top else '' }}[{{ a.title }}]({{ a.link }})<br>
+              <small>{{ a.source }}</small>
+
+              {% endfor %}
+      - type: grid
+        cards:
+          - type: markdown
+            title: Politik
+            content: |
+              {% for a in state_attr('sensor.newsfeed_politik', 'articles') or [] %}
+              {{ '⭐ ' if a.top else '' }}[{{ a.title }}]({{ a.link }})<br>
+              <small>{{ a.source }}</small>
+
+              {% endfor %}
+      - type: grid
+        cards:
+          - type: markdown
+            title: Jagd
+            content: |
+              {% for a in state_attr('sensor.newsfeed_jagd', 'articles') or [] %}
+              [{{ a.title }}]({{ a.link }})<br>
+              <small>{{ a.source }}</small>
+
+              {% endfor %}

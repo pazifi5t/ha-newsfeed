@@ -1,0 +1,79 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Newsfeed ist bereits eingerichtet. Themen und Quellen änderst du über „Konfigurieren“."
+    },
+    "error": {
+      "no_topics": "Bitte mindestens ein Themengebiet wählen.",
+      "no_sources": "Bitte mindestens eine Quelle wählen oder einen eigenen Feed eintragen.",
+      "invalid_url": "Jede Zeile muss eine URL mit http:// oder https:// sein.",
+      "invalid_feed": "Unter dieser Adresse wurde kein lesbarer RSS-/Atom-Feed gefunden."
+    },
+    "step": {
+      "user": {
+        "title": "Newsfeed einrichten",
+        "description": "Wähle die Themengebiete. Im nächsten Schritt legst du pro Thema die Quellen fest.",
+        "data": {
+          "topics": "Themengebiete",
+          "period": "Standard-Zeitraum",
+          "max_items": "Artikel pro Thema",
+          "scan_interval": "Aktualisierungsintervall"
+        }
+      },
+      "sources": {
+        "title": "Quellen für {topic}",
+        "description": "Wähle die Quellen für **{topic}**. Optional kannst du eigene RSS-/Atom-Feeds ergänzen (eine URL pro Zeile).",
+        "data": {
+          "sources": "Quellen",
+          "custom_feeds": "Eigene Feeds"
+        }
+      }
+    }
+  },
+  "options": {
+    "error": {
+      "no_topics": "Bitte mindestens ein Themengebiet wählen.",
+      "no_sources": "Bitte mindestens eine Quelle wählen oder einen eigenen Feed eintragen.",
+      "invalid_url": "Jede Zeile muss eine URL mit http:// oder https:// sein.",
+      "invalid_feed": "Unter dieser Adresse wurde kein lesbarer RSS-/Atom-Feed gefunden."
+    },
+    "step": {
+      "init": {
+        "title": "Newsfeed anpassen",
+        "data": {
+          "topics": "Themengebiete",
+          "period": "Standard-Zeitraum",
+          "max_items": "Artikel pro Thema",
+          "scan_interval": "Aktualisierungsintervall"
+        }
+      },
+      "sources": {
+        "title": "Quellen für {topic}",
+        "description": "Wähle die Quellen für **{topic}**. Optional kannst du eigene RSS-/Atom-Feeds ergänzen (eine URL pro Zeile).",
+        "data": {
+          "sources": "Quellen",
+          "custom_feeds": "Eigene Feeds"
+        }
+      }
+    }
+  },
+  "entity": {
+    "select": {
+      "period": {
+        "name": "Zeitraum",
+        "state": {
+          "day": "Heute (24 h)",
+          "week": "Diese Woche (7 Tage)"
+        }
+      },
+      "topic": {
+        "name": "Thema"
+      }
+    },
+    "sensor": {
+      "selected": {
+        "name": "Ausgewählte News"
+      }
+    }
+  }
+}
