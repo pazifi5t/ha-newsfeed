@@ -47,12 +47,16 @@ Themen, Quellen, Zeitraum, Artikelanzahl und Intervall lassen sich später über
 
 ## Entitäten
 
-| Entität (deutsche HA-Sprache) | Zweck |
-|---|---|
-| `sensor.newsfeed_it`, `sensor.newsfeed_politik`, `sensor.newsfeed_jagd` | Artikel des Themas |
-| `sensor.newsfeed_ausgewahlte_news` | Artikel des im Dashboard gewählten Themas |
-| `select.newsfeed_thema` | Welches Thema der Auswahl-Sensor zeigt |
-| `select.newsfeed_zeitraum` | Heute (24 h) oder Diese Woche (7 Tage) – gilt für alle Sensoren |
+Die Entity-IDs entstehen in der Systemsprache, in der Home Assistant beim Einrichten lief:
+
+| HA auf Englisch | HA auf Deutsch | Zweck |
+|---|---|---|
+| `sensor.newsfeed_it`, `sensor.newsfeed_politik`, `sensor.newsfeed_jagd` | (gleich) | Artikel des Themas |
+| `sensor.newsfeed_selected_news` | `sensor.newsfeed_ausgewahlte_news` | Artikel des im Dashboard gewählten Themas |
+| `select.newsfeed_topic` | `select.newsfeed_thema` | Welches Thema der Auswahl-Sensor zeigt |
+| `select.newsfeed_period` | `select.newsfeed_zeitraum` | Heute (24 h) oder Diese Woche (7 Tage) – gilt für alle Sensoren |
+
+Die genaue ID steht unter *Einstellungen → Geräte & Dienste → Entitäten → Entität → Zahnrad*.
 
 Zustand der Sensoren ist die Anzahl der Artikel. Attribute:
 
@@ -66,8 +70,14 @@ Die Artikellisten werden nicht in die Datenbank (Recorder) geschrieben.
 
 ## Dashboard
 
-Ein fertiges Beispiel mit Themen-/Zeitraum-Umschalter und Markdown-Liste liegt in
-[`examples/dashboard.yaml`](examples/dashboard.yaml).
+Am besten eignet sich die eingebaute **Markdown-Karte**: Sie kann per Template über die
+Artikelliste laufen und zeigt Überschrift, Quelle, Uhrzeit, Anreißer und Vorschaubild.
+Darüber zwei **Tile-Karten** mit Auswahl-Feature für Thema und Zeitraum – gut per Touch
+bedienbar, etwa auf einem Wandpanel. Eine kompakte Variante mit allen Themen
+nebeneinander ist ebenfalls enthalten.
+
+Beides liegt fertig in [`examples/dashboard.yaml`](examples/dashboard.yaml)
+(mit englischen Entity-IDs; die deutschen stehen oben in der Datei).
 
 ## Benachrichtigung bei neuen Artikeln
 

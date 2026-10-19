@@ -1,7 +1,18 @@
-# Newsfeed – Beispiel-Dashboard (Ansicht bearbeiten → Raw-Konfigurationseditor)
-# Entity-IDs gelten für eine deutschsprachige HA-Installation; bei Englisch heißen
-# die Auswahlen select.newsfeed_period / select.newsfeed_topic und der Sensor
-# sensor.newsfeed_selected_news.
+# Newsfeed – Beispiel-Dashboard
+# Ansicht bearbeiten → ⋮ → Raw-Konfigurationseditor, oder einzelne Karten
+# über „Karte hinzufügen → Manuell“ einfügen.
+#
+# Die Entity-IDs hängen von der Systemsprache ab, in der Home Assistant beim
+# Einrichten der Integration lief:
+#
+#   Englisch                          Deutsch
+#   select.newsfeed_topic             select.newsfeed_thema
+#   select.newsfeed_period            select.newsfeed_zeitraum
+#   sensor.newsfeed_selected_news     sensor.newsfeed_ausgewahlte_news
+#   sensor.newsfeed_it / _politik / _jagd  (in beiden Sprachen gleich)
+#
+# Dieses Beispiel nutzt die englischen IDs. Die genaue ID siehst du unter
+# Einstellungen → Geräte & Dienste → Entitäten → Entität → Zahnrad.
 
 title: News
 views:
@@ -9,32 +20,40 @@ views:
     path: news
     icon: mdi:newspaper-variant-outline
     cards:
-      # Umschalten: Thema und Zeitraum
-      - type: entities
-        entities:
-          - entity: select.newsfeed_thema
-          - entity: select.newsfeed_zeitraum
+      # Thema und Zeitraum umschalten, darunter die Artikel des gewählten Themas
+      - type: vertical-stack
+        cards:
+          - type: grid
+            columns: 2
+            square: false
+            cards:
+              - type: tile
+                entity: select.newsfeed_topic
+                features:
+                  - type: select-options
+              - type: tile
+                entity: select.newsfeed_period
+                features:
+                  - type: select-options
+          - type: markdown
+            content: |
+              {% set s = 'sensor.newsfeed_selected_news' %}
+              {% for a in state_attr(s, 'articles') or [] %}
+              {% if a.image %}<img src="{{ a.image }}" width="100%">{% endif %}
+              {{ '⭐ ' if a.top else '' }}**[{{ a.title }}]({{ a.link }})**<br>
+              <small>{{ a.source }}{% if a.published %} · {{ as_timestamp(a.published) | timestamp_custom('%H:%M') }}{% endif %}</small>
+              {% if a.summary %}<br><small>{{ a.summary }}</small>{% endif %}
 
-      # Liste des gewählten Themas (ideal fürs Wandpanel)
-      - type: markdown
-        title: Schlagzeilen
-        content: |
-          {% set s = 'sensor.newsfeed_ausgewahlte_news' %}
-          {% set arts = state_attr(s, 'articles') or [] %}
-          ### {{ state_attr(s, 'topic') }} · {{ state_attr(s, 'period_label') }}
-          {% for a in arts %}
-          {{ '⭐ ' if a.top else '' }}**[{{ a.title }}]({{ a.link }})**<br>
-          <small>{{ a.source }}{% if a.published %} · {{ as_timestamp(a.published) | timestamp_custom('%a %d.%m. %H:%M') }}{% endif %}</small>
-          {% if a.summary %}<br><small>{{ a.summary }}</small>{% endif %}
+              ---
+              {% else %}
+              _Keine Artikel im gewählten Zeitraum._
+              {% endfor %}
+              {% if state_attr(s, 'unavailable_sources') %}
+              <small>⚠️ Nicht erreichbar: {{ state_attr(s, 'unavailable_sources') | join(', ') }}</small>
+              {% endif %}
 
-          {% else %}
-          _Keine Artikel im gewählten Zeitraum._
-          {% endfor %}
-          {% if state_attr(s, 'unavailable_sources') %}
-          <small>⚠️ Nicht erreichbar: {{ state_attr(s, 'unavailable_sources') | join(', ') }}</small>
-          {% endif %}
-
-  # Alternative: alle Themen nebeneinander
+  # Kompakte Variante: alle Themen nebeneinander, nur Überschriften
+  # (gut fürs Wandpanel zum Überfliegen)
   - title: Alle Themen
     path: news-alle
     type: sections

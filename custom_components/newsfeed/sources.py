@@ -76,7 +76,7 @@ TOPICS: dict[str, Topic] = {
     "jagd": Topic(
         key="jagd",
         name="Jagd",
-        icon="mdi:deer",
+        icon="mdi:pine-tree",
         sources=(
             Source("wildundhund", "WILD UND HUND",
                    google_news("site:wildundhund.de"), priority=2, default=True,
