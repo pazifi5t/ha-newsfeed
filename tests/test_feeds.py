@@ -193,7 +193,7 @@ class RankTests(unittest.TestCase):
 
 class CatalogTests(unittest.TestCase):
     def test_catalog(self) -> None:
-        self.assertEqual(set(TOPICS), {"it", "politik", "jagd"})
+        self.assertEqual(set(TOPICS), {"it", "politik", "jagd", "metal"})
         for topic in TOPICS.values():
             keys = [s.key for s in topic.sources]
             self.assertEqual(len(keys), len(set(keys)))
@@ -202,6 +202,9 @@ class CatalogTests(unittest.TestCase):
                 self.assertTrue(s.url.startswith("https://"))
         wuh = TOPICS["jagd"].source("wildundhund")
         self.assertIn("site%3Awildundhund.de+when%3A7d", wuh.url)
+        bm = TOPICS["metal"].source("blabbermouth")
+        self.assertTrue(bm.url.endswith("&hl=en-US&gl=US&ceid=US:en"))
+        self.assertEqual(TOPICS["metal"].default_sources, ["metal_hammer", "rock_hard", "metal_de"])
 
     def test_custom_source(self) -> None:
         s = custom_source("https://www.jagderleben.de/rss.xml")

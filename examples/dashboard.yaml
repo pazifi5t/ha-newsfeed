@@ -9,7 +9,7 @@
 #   select.newsfeed_topic             select.newsfeed_thema
 #   select.newsfeed_period            select.newsfeed_zeitraum
 #   sensor.newsfeed_selected_news     sensor.newsfeed_ausgewahlte_news
-#   sensor.newsfeed_it / _politik / _jagd  (in beiden Sprachen gleich)
+#   sensor.newsfeed_it / _politik / _jagd / _metal  (in beiden Sprachen gleich)
 #
 # Dieses Beispiel nutzt die englischen IDs. Die genaue ID siehst du unter
 # Einstellungen → Geräte & Dienste → Entitäten → Entität → Zahnrad.
@@ -84,6 +84,16 @@ views:
             title: Jagd
             content: |
               {% for a in state_attr('sensor.newsfeed_jagd', 'articles') or [] %}
+              [{{ a.title }}]({{ a.link }})<br>
+              <small>{{ a.source }}</small>
+
+              {% endfor %}
+      - type: grid
+        cards:
+          - type: markdown
+            title: Metal
+            content: |
+              {% for a in state_attr('sensor.newsfeed_metal', 'articles') or [] %}
               [{{ a.title }}]({{ a.link }})<br>
               <small>{{ a.source }}</small>
 

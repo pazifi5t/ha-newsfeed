@@ -30,12 +30,18 @@ class Topic:
         return [s.key for s in self.sources if s.default]
 
 
-def google_news(query: str) -> str:
-    """Google-News-RSS-Suche (deutsch). Für Magazine ohne eigenen Feed."""
+_GOOGLE_NEWS_EDITIONS = {
+    "de": "&hl=de&gl=DE&ceid=DE:de",
+    "en": "&hl=en-US&gl=US&ceid=US:en",
+}
+
+
+def google_news(query: str, lang: str = "de") -> str:
+    """Google-News-RSS-Suche. Für Magazine ohne (verlässlichen) eigenen Feed."""
     return (
         "https://news.google.com/rss/search?q="
         + quote_plus(f"{query} when:7d")
-        + "&hl=de&gl=DE&ceid=DE:de"
+        + _GOOGLE_NEWS_EDITIONS[lang]
     )
 
 
@@ -96,6 +102,29 @@ TOPICS: dict[str, Topic] = {
             Source("jagd_presse", "Jagd in der Tagespresse",
                    google_news('(Jagd OR Jäger OR Jagdverband) -"Jagd auf"'), priority=1,
                    strip_source_suffix=True),
+        ),
+    ),
+    "metal": Topic(
+        key="metal",
+        name="Metal",
+        icon="mdi:guitar-electric",
+        sources=(
+            Source("metal_hammer", "METAL HAMMER",
+                   google_news("site:metal-hammer.de"), priority=2, default=True,
+                   strip_source_suffix=True),
+            Source("rock_hard", "Rock Hard",
+                   google_news("site:rockhard.de"), priority=2, default=True,
+                   strip_source_suffix=True),
+            Source("metal_de", "metal.de",
+                   google_news("site:metal.de"), priority=2, default=True,
+                   strip_source_suffix=True),
+            Source("blabbermouth", "Blabbermouth (englisch)",
+                   google_news("site:blabbermouth.net", lang="en"), priority=1,
+                   strip_source_suffix=True),
+            Source("metal_injection", "Metal Injection (englisch)",
+                   "https://feeds.feedburner.com/metalinjection", priority=1),
+            Source("metal_storm", "Metal Storm (englisch)",
+                   "https://metalstorm.net/rss/news.xml", priority=1),
         ),
     ),
 }

@@ -11,12 +11,13 @@ Meldungen als Sensor, sortiert nach redaktioneller Gewichtung und Aktualität.
 | **IT** | heise online Top-News, heise Security | iX, heise Developer, SPIEGEL Netzwelt |
 | **Politik** | SPIEGEL Politik, SPIEGEL Schlagzeilen (nur Gewichtung) | SPIEGEL Ausland, SPIEGEL Wirtschaft |
 | **Jagd** | WILD UND HUND, PIRSCH, jagderleben (JÄGER / Unsere Jagd) | Deutsche Jagdzeitung, Deutscher Jagdverband, Jagd in der Tagespresse |
+| **Metal** | METAL HAMMER, Rock Hard, metal.de | Blabbermouth, Metal Injection, Metal Storm (englischsprachig) |
 
 Zu jedem Thema kannst du beliebige eigene RSS-/Atom-Feeds ergänzen (eine URL pro Zeile);
 sie werden beim Speichern auf Gültigkeit geprüft.
 
-**Jagd-Quellen:** Die Jagdmagazine werden über die Google-News-Suche eingebunden
-(`site:wildundhund.de` usw.), weil nicht jedes Magazin einen verlässlichen eigenen Feed
+**Jagd- und Metal-Quellen:** Die Jagdmagazine sowie METAL HAMMER, Rock Hard, metal.de und Blabbermouth werden über die Google-News-Suche eingebunden
+(`site:wildundhund.de`, `site:metal-hammer.de` usw.), weil nicht jedes Magazin einen verlässlichen eigenen Feed
 anbietet. Die Links führen daher über news.google.com zum Artikel. Bietet ein Magazin
 einen eigenen Feed, trage ihn als eigenen Feed ein und schalte die Google-News-Variante ab.
 
@@ -51,7 +52,7 @@ Die Entity-IDs entstehen in der Systemsprache, in der Home Assistant beim Einric
 
 | HA auf Englisch | HA auf Deutsch | Zweck |
 |---|---|---|
-| `sensor.newsfeed_it`, `sensor.newsfeed_politik`, `sensor.newsfeed_jagd` | (gleich) | Artikel des Themas |
+| `sensor.newsfeed_it`, `sensor.newsfeed_politik`, `sensor.newsfeed_jagd`, `sensor.newsfeed_metal` | (gleich) | Artikel des Themas |
 | `sensor.newsfeed_selected_news` | `sensor.newsfeed_ausgewahlte_news` | Artikel des im Dashboard gewählten Themas |
 | `select.newsfeed_topic` | `select.newsfeed_thema` | Welches Thema der Auswahl-Sensor zeigt |
 | `select.newsfeed_period` | `select.newsfeed_zeitraum` | Heute (24 h) oder Diese Woche (7 Tage) – gilt für alle Sensoren |
@@ -101,6 +102,15 @@ automation:
           data:
             url: "{{ trigger.event.data.link }}"
 ```
+
+## Neues Thema in einer bestehenden Installation
+
+Nach einem Update erscheinen neue Themen nicht automatisch. Aktivieren:
+*Einstellungen → Geräte & Dienste → Newsfeed → Konfigurieren* → Thema anhaken → Quellen bestätigen.
+
+## Versionen
+
+Änderungen stehen in [`CHANGELOG.md`](CHANGELOG.md). Updates erscheinen in HACS als neue Release-Version.
 
 ## Entwicklung
 
