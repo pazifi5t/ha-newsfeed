@@ -100,13 +100,16 @@ def parse_feed(raw: bytes, source: Source) -> list[Article]:
             continue
         if source.strip_source_suffix:
             title = _strip_source_suffix(title, _text(entry, "source"))
+        summary = _summary(entry)
+        if _repeats_title(summary, title):
+            summary = ""
         articles.append(
             Article(
                 title=title,
                 link=link,
                 source=source.name,
                 published=_entry_datetime(entry),
-                summary=_summary(entry),
+                summary=summary,
                 image=_image(entry),
             )
         )
@@ -233,6 +236,17 @@ def _summary(entry: ET.Element) -> str:
     if len(text) > SUMMARY_LENGTH:
         text = text[: SUMMARY_LENGTH - 1].rsplit(" ", 1)[0] + "…"
     return text
+
+
+def _repeats_title(summary: str, title: str) -> bool:
+    """Anreißer, der nur die Überschrift (ggf. plus Quellenname) wiederholt.
+
+    Google News liefert als Beschreibung lediglich „Titel  Quelle“.
+    """
+    if not summary:
+        return False
+    s_key, t_key = _title_key(summary)[2:], _title_key(title)[2:]
+    return s_key.startswith(t_key) and len(s_key) - len(t_key) <= 40
 
 
 def _strip_source_suffix(title: str, source_name: str) -> str:

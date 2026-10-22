@@ -9,5 +9,5 @@
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/pazifi5t/ha-newsfeed/issues",
   "requirements": [],
-  "version": "1.1.0"
+  "version": "1.1.1"
 }

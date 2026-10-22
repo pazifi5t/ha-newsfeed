@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1 – 2026-10-22
+
+### Behoben
+- Bei Google-News-Quellen (Jagd, Metal) wiederholte der Anreißer nur die Überschrift
+  samt Magazinnamen. Solche Anreißer werden jetzt weggelassen.
+
 ## 1.1.0 – 2026-10-20
 
 ### Neu

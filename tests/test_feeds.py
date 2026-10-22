@@ -94,7 +94,7 @@ GOOGLE_NEWS = b"""<?xml version="1.0" encoding="UTF-8"?>
     <link>https://news.google.com/rss/articles/CBMiABC?oc=5</link>
     <guid isPermaLink="false">CBMiABC</guid>
     <pubDate>Mon, 19 Oct 2026 16:00:00 GMT</pubDate>
-    <description>&lt;a href="x"&gt;Neue Regeln&lt;/a&gt;</description>
+    <description>&lt;a href="x"&gt;Neue Regeln f\xc3\xbcr die Dr\xc3\xbcckjagd&lt;/a&gt;&amp;nbsp;&amp;nbsp;&lt;font color="#6f6f6f"&gt;Wild und Hund&lt;/font&gt;</description>
     <source url="https://www.wildundhund.de">Wild und Hund</source>
   </item>
 </channel></rss>"""
@@ -135,6 +135,16 @@ class ParseTests(unittest.TestCase):
         items = parse_feed(GOOGLE_NEWS, source)
         self.assertEqual(items[0].title, "Neue Regeln für die Drückjagd")
         self.assertTrue(items[0].link.startswith("https://news.google.com/"))
+        # Beschreibung wiederholt nur den Titel -> kein Anreißer
+        self.assertEqual(items[0].summary, "")
+
+    def test_real_summary_kept(self) -> None:
+        feed = b"""<rss version="2.0"><channel><item>
+          <title>Neue Single</title><link>https://example.org/x</link>
+          <description>Neue Single: Die Band kuendigt ausserdem eine ausgedehnte Europatour fuer den Herbst an.</description>
+        </item></channel></rss>"""
+        items = parse_feed(feed, src("x"))
+        self.assertTrue(items[0].summary.startswith("Neue Single: Die Band"))
 
     def test_rdf(self) -> None:
         items = parse_feed(RDF, src("rdf"))
