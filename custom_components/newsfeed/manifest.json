@@ -1,7 +1,12 @@
 {
   "domain": "newsfeed",
   "name": "Newsfeed",
-  "codeowners": ["@pazifi5t"],
+  "categories": [
+    "news_social_media"
+  ],
+  "codeowners": [
+    "@pazifi5t"
+  ],
   "config_flow": true,
   "dependencies": [],
   "documentation": "https://github.com/pazifi5t/ha-newsfeed",

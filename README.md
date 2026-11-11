@@ -36,7 +36,10 @@ Redaktionen:
 
 ## Installation
 
-**HACS (benutzerdefiniertes Repository):** HACS → ⋮ → Benutzerdefinierte Repositories →
+**Marketplace (ab Home Assistant 2026.11, empfohlen):** *Einstellungen → Marketplace → Add from link* →
+`https://github.com/pazifi5t/ha-newsfeed`, Typ *Integration* → installieren, die Einrichtung startet direkt.
+
+**HACS (Home Assistant vor 2026.11):** HACS → ⋮ → Benutzerdefinierte Repositories →
 `https://github.com/pazifi5t/ha-newsfeed`, Typ *Integration* → installieren → HA neu starten.
 
 **Manuell:** Ordner `custom_components/newsfeed` nach `/config/custom_components/` kopieren
@@ -110,7 +113,7 @@ Nach einem Update erscheinen neue Themen nicht automatisch. Aktivieren:
 
 ## Versionen
 
-Änderungen stehen in [`CHANGELOG.md`](CHANGELOG.md). Updates erscheinen in HACS als neue Release-Version.
+Änderungen stehen in [`CHANGELOG.md`](CHANGELOG.md). Updates erscheinen im Marketplace (bzw. in HACS) als neue Release-Version.
 
 ## Entwicklung
 
