@@ -123,6 +123,12 @@ python -m unittest discover tests
 
 Die Feed-Logik (`feeds.py`) ist von Home Assistant unabhängig und kommt ohne Fremdpakete aus.
 
+## Unterstützen
+
+Wenn dir die Integration gefällt, kannst du die Weiterentwicklung über GitHub Sponsors unterstützen:
+
+[![Sponsor](https://img.shields.io/badge/Sponsor-pazifi5t-ea4aaa?logo=githubsponsors)](https://github.com/sponsors/pazifi5t)
+
 ## Lizenz
 
 MIT © pazifi5t. Die Inhalte der Feeds gehören den jeweiligen Verlagen; die Integration zeigt
